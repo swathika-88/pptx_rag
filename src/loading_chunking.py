@@ -1,5 +1,5 @@
 from langchain_community.document_loaders import UnstructuredPowerPointLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.text_splitter import CharacterTextSplitter
 import os
 
 def load_and_chunk_pptx_file(file_path, chunk_size=1000, chunk_overlap=200):
@@ -19,10 +19,10 @@ def load_and_chunk_pptx_file(file_path, chunk_size=1000, chunk_overlap=200):
     documents = loader.load()
     
     # Initialize text splitter
-    text_splitter = RecursiveCharacterTextSplitter(
+    text_splitter = CharacterTextSplitter(
         chunk_size=chunk_size,
         chunk_overlap=chunk_overlap,
-        separators=["\n\n", "\n", ". ", " ", ""]
+        separator="\n\n"
     )
     
     # Split documents into chunks
@@ -30,21 +30,21 @@ def load_and_chunk_pptx_file(file_path, chunk_size=1000, chunk_overlap=200):
     
     return chunks
 
-# pptx_file =  "ML.pptx" # Replace with your file path
+pptx_file =  "ML.pptx" # Replace with your file path
     
-# try:
-#         chunks = load_and_chunk_pptx_file(pptx_file, chunk_size=500, chunk_overlap=100)
+try:
+        chunks = load_and_chunk_pptx_file(pptx_file, chunk_size=500, chunk_overlap=100)
         
-#         print(f"Successfully loaded and chunked {pptx_file}")
-#         print(f"Created {len(chunks)} chunks")
+        print(f"Successfully loaded and chunked {pptx_file}")
+        print(f"Created {len(chunks)} chunks")
         
-#         # Display first few chunks
-#         for i, chunk in enumerate(chunks[:3]):
-#             print(f"\n--- Chunk {i+1} ---")
-#             print(chunk.page_content[:200] + "...")
-#             print(f"Metadata: {chunk.metadata}")
+        # Display first few chunks
+        for i, chunk in enumerate(chunks[:3]):
+            print(f"\n--- Chunk {i+1} ---")
+            print(chunk.page_content[:200] + "...")
+            print(f"Metadata: {chunk.metadata}")
             
-# except FileNotFoundError:
-#         print(f"File {pptx_file} not found. Please check the file path.")
-# except Exception as e:
-#         print(f"Error processing file: {e}")
+except FileNotFoundError:
+        print(f"File {pptx_file} not found. Please check the file path.")
+except Exception as e:
+        print(f"Error processing file: {e}")

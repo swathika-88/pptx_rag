@@ -5,3 +5,5 @@ faiss-cpu
 sentence-transformers
 langchain-chroma>=0.1.2
 langchain-huggingface
+langchain-groq
+openai

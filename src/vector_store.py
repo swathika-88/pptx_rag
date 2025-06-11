@@ -16,16 +16,16 @@ def create_vector_store(chunks, persist_directory="./chroma_db"):
     
     return vectorstore
 
-def search(vectorstore, query, k=3):
-    """Search the vector store"""
-    results = vectorstore.similarity_search(query, k=k)
-    return [doc.page_content for doc in results]
+# def search(vectorstore, query, k=3):
+#     """Search the vector store"""
+#     results = vectorstore.similarity_search(query, k=k)
+#     return [doc.page_content for doc in results]
 
-# Load and create vector store
-chunks = load_and_chunk_pptx_file("ML.pptx")
-vectorstore = create_vector_store(chunks)
+# # Load and create vector store
+# chunks = load_and_chunk_pptx_file("ML.pptx")
+# vectorstore = create_vector_store(chunks)
     
-# Search
-results = search(vectorstore, "What is supervised learning?")
-for i, doc in enumerate(results):
-        print(f"{i+1}. {doc[:100]}...")
+# # Search
+# results = search(vectorstore, "What is supervised learning?")
+# for i, doc in enumerate(results):
+#         print(f"{i+1}. {doc[:100]}...")
